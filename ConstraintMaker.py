@@ -159,6 +159,13 @@ class ConstraintMaker:
                     )
         return quadratic_constraints
     
+    def get_objective(self, current_gw, number_of_gw):
+        objective = np.zeros(self.n)
+        for i in range(current_gw, current_gw + number_of_gw):
+            objective += np.array(self.data[f'{i}_pts_no_prob'])
+        return concatenate_three_times(objective, [1,0,1])
+        
+    
 
 #Perform dimensionality tests
 data_reader = fpldr.DataReader("fpl-form-predicted-points.csv")
